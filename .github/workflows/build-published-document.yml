@@ -43,7 +43,7 @@ jobs:
         
       # Builds the documentation.
       - name: Build the document
-        run: node build.js -m -i src/flexible-guide.html -o publish/index.html
+        run: node build.js -m -i src/flexible-guide.html -o docs/index.html
         
       # Commit!
       - name: Commit
