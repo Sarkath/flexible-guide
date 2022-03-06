@@ -51,4 +51,4 @@ jobs:
         with:
           commit_message: Auto-publishing changes
           branch: publish
-          file_pattern: publish/*
+          file_pattern: docs/*
