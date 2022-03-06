@@ -49,6 +49,6 @@ jobs:
       - name: Commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit: Auto-publishing changes
+          commit_message: Auto-publishing changes
           branch: publish
           file_pattern: publish/*
