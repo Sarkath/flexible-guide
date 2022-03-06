@@ -1,0 +1,11 @@
+@import "_normalize";
+
+$bgColor: #316;
+$fgColor: #eee;
+
+* { box-sizing: border-box; }
+
+body {
+  background-color: $bgColor;
+  color: $fgColor;
+}
