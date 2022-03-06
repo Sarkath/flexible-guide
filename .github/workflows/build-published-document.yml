@@ -1,0 +1,54 @@
+name: build published document
+
+on:
+  push:
+    branches:
+    - publish
+
+  pull_request:
+    branches:
+    - publish
+
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repo.
+      - uses: actions/checkout@v2
+
+      # Sets up Node.js.
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      # Cache Node modules.
+      - name: Cache Node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles("**/package-lock.json") }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+            
+      # Install npm packages.
+      - name: Install npm packages
+        run: npm install
+        
+      # Builds the documentation.
+      - name: Build the document
+        run: node build.js -m -i src/flexible-guide.html -o publish/index.html
+        
+      # Commit!
+      - name: Commit
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit: Auto-publishing changes
+          branch: publish
+          file_pattern: publish/*
